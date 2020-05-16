@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   
+
+  <title>Card Sort</title>
+</head>
+<body>
+
+<div class="container">
+	<h1 id="CardsortText_text" class="qtext">Please categorize the following definitions of bank types.</h1>
+	<div id="CardsortText_comment" class="instruction">You can drag each definition and drop it into the group of your choice.</div>
+	<br><br>
+		
+	<div class="groupboard row" id="groupboard">
+		<div class="group column flex" data-category="investment">
+			<h1>Investment</h1>
+		</div>
+		<div class="group column flex" data-category="retail">
+			<h1>Retail</h1>
+		</div>
+		<div class="group column flex" data-category="commercial">
+			<h1>Commercial</h1>
+		</div>
+		<div class="group column flex" data-category="online">
+			<h1>Online</h1>
+		</div>
+		<div class="group column flex" data-category="online">
+			<h1>Online</h1>
+		</div>
+	</div>
+
+	<div class="cardgroup row">
+		<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" data-card="1">
+			<div class="portlet-header ui-widget-header ui-corner-all" id="card1"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/NativityChristmasLights2.jpg/550px-NativityChristmasLights2.jpg" class="fr-fic fr-dii"></div>
+		</div>
+		<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" data-card="1">
+			<div class="portlet-header ui-widget-header ui-corner-all" id="card2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/NativityChristmasLights2.jpg/550px-NativityChristmasLights2.jpg" class="fr-fic fr-dii"></div>
+		</div>
+		<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" data-card="1">
+			<div class="portlet-header ui-widget-header ui-corner-all" id="card3"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/NativityChristmasLights2.jpg/550px-NativityChristmasLights2.jpg" class="fr-fic fr-dii"></div>
+		</div>
+		<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" data-card="1">
+			<div class="portlet-header ui-widget-header ui-corner-all" id="card4"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/NativityChristmasLights2.jpg/550px-NativityChristmasLights2.jpg" class="fr-fic fr-dii"></div>
+		</div>
+		<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" data-card="1">
+			<div class="portlet-header ui-widget-header ui-corner-all" id="card5"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/NativityChristmasLights2.jpg/550px-NativityChristmasLights2.jpg" class="fr-fic fr-dii"></div>
+		</div>
+		<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" data-card="1">
+			<div class="portlet-header ui-widget-header ui-corner-all" id="card6"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/NativityChristmasLights2.jpg/550px-NativityChristmasLights2.jpg" class="fr-fic fr-dii"></div>
+		</div>
+	</div>
+
+
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+   <script>
+   	$(function () {
+  $(".column").sortable({
+    connectWith: [".cardgroup, .column"],
+    handle: ".portlet-header",
+    cancel: ".portlet-toggle",
+    placeholder: "portlet-placeholder ui-corner-all",
+    receive: function (event, ui) {
+      var card = ui.item[0].dataset.card;
+      var category = this.dataset.category;
+
+      var question = ($("tr[data-question='" + card + "']"));
+      question.find("input[value='" + category + "']").prop("checked", true);
+    },
+    remove: function (event, ui) {
+      var card = ui.item[0].dataset.card;
+      var question = ($("tr[data-question='" + card + "']"));
+      question.find("input").prop("checked", false);
+    }
+  });
+
+  $(".cardgroup").sortable({
+    connectWith: ".column",
+    handle: ".portlet-header",
+    cancel: ".portlet-toggle",
+    placeholder: "portlet-placeholder ui-corner-all",
+
+  });
+
+});
+   </script>
+   <style>
+   	 body {
+   font-family: helvetica, arial;
+   font-size: 12px;
+   background: linear-gradient(to right, #12CBC4, #55d9d4);
+ }
+
+ .container {}
+
+
+ .groupboard {
+   margin: 10px auto;
+   padding-bottom: 25px;
+ }
+
+ .cardgroup {
+   margin: 100px 0 10px 0;
+   border: solid 1px black;
+ }
+
+ h1 {
+   color: white;
+   text-align: center;
+   font-size: 24px;
+   padding: 30px 0 0 0;
+ }
+
+
+\
+
+ /*NEW TABLE*/
+ .limiter {
+   width: 100%;
+   margin: 0 auto;
+ }
+
+ .container-table100 {
+   width: 100%;
+   /* background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -o-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+  background: linear-gradient(45deg, #4158d0, #c850c0);*/
+
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -moz-box;
+   display: -ms-flexbox;
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   padding: 33px 30px;
+ }
+
+ .wrap-table100 {
+   width: 1170px;
+ }
+
+ table {
+   border-spacing: 1;
+   border-collapse: collapse;
+   background: white;
+   border-radius: 10px;
+   overflow: hidden;
+   width: 100%;
+   margin: 0 auto;
+   position: relative;
+ }
+
+ table * {
+   position: relative;
+ }
+
+ table td,
+ table th {
+   padding-left: 8px;
+ }
+
+ table thead tr {
+   height: 60px;
+   background: rgba(18, 137, 167, 1.0);
+ }
+
+ table tbody tr {
+   height: 50px;
+ }
+
+ table tbody tr:last-child {
+   border: 0;
+ }
+
+ table td.l,
+ table th.l {
+   text-align: right;
+ }
+
+ table td.c,
+ table th.c {
+   text-align: center;
+ }
+
+ table td.r,
+ table th.r {
+   text-align: center;
+ }
+
+
+ .table100-head th {
+   font-size: 18px;
+   color: #fff;
+   line-height: 1.2;
+   font-weight: unset;
+ }
+
+ tbody tr:nth-child(even) {
+   background-color: #f5f5f5;
+ }
+
+ tbody tr {
+   font-size: 15px;
+   color: #808080;
+   line-height: 1.2;
+   font-weight: unset;
+ }
+
+ tbody tr:hover {
+   color: #555555;
+   background-color: #f5f5f5;
+   cursor: pointer;
+ }
+
+
+
+ .instruction {
+   color: white;
+   text-align: center;
+   font-size: 18px;
+   padding: 10px 0 0 0;
+ }
+
+ .column {
+   width: 150px;
+   float: left;
+   border: solid 1px black;
+   height: 100%;
+   margin: 0 20px 0 20px;
+ }
+
+ .default {
+   width: 25%;
+   float: left;
+   border: none;
+   height: 100%;
+   margin: 0 20px 0 20px;
+ }
+
+ .portlet {
+   width: 150px;
+   margin: 5px 2px;
+   padding: 0 0;
+ }
+ .portlet img{
+ 	width: 145px;
+ }
+
+ .portlet-header {
+   padding: 0px;
+   margin-bottom: 0px;
+   position: relative;
+ }
+
+ .portlet-toggle {
+   position: absolute;
+   top: 50%;
+   right: 0;
+   margin-top: -8px;
+ }
+
+ .portlet-content {
+   padding: 0.4em;
+ }
+
+ .portlet-placeholder {
+   border: 1px dotted black;
+   margin: 0 1em 1em 0;
+   height: 50px;
+ }
+
+ /*Custom buttons*/
+ /*Custom buttons*/
+
+ #next-btn {
+   /* display: none;*/
+   font-size: 20px;
+   color: #494949 !important;
+   text-decoration: none;
+   background: none;
+   padding: 14px 28px;
+   margin: 10px auto;
+   border: 4px solid #494949 !important;
+   display: inline-block;
+   width: 100%;
+   transition: all 0.4s ease 0s;
+ }
+
+ #next-btn:hover {
+   color: #ffffff !important;
+   background: #27ae60;
+   border-color: #27ae60 !important;
+   transition: all 0.4s ease 0s;
+ }
+
+ #reset-btn {
+   font-size: 20px;
+   color: #494949 !important;
+   text-decoration: none;
+   background: none;
+   padding: 14px 28px;
+   margin: 10px auto;
+   border: 4px solid #494949 !important;
+   display: inline-block;
+   width: 100%;
+   transition: all 0.4s ease 0s;
+ }
+
+ #reset-btn:hover {
+   color: #ffffff !important;
+   background: #e74c3c;
+   border-color: #e74c3c !important;
+   transition: all 0.4s ease 0s;
+ }
+
+
+
+
+
+ @media screen and (max-width:768px) {
+
+
+
+   .container {}
+
+   .groupboard {
+     margin: 10px 10px 10px 10px;
+     width: 100%;
+   }
+
+   .cardgroup {
+     margin: 100px auto;
+     width: 100%;
+     border: solid 4px black;
+   }
+
+   h1 {
+     margin-left: 20px;
+     font-size: 2rem;
+   }
+
+
+   /*table*/
+
+   /*table{
+  font-size: 19px;
+}
+
+table thead {
+    display: block;
+  }
+table tbody th,
+table tbody td {
+    display: block;
+  }
+
+ table tbody th{
+  background-color: rgba(255,255,255,0.3);
+ } 
+
+table td span {
+    display: block;
+  }*/
+
+   table {
+     display: block;
+   }
+
+   table>*,
+   table tr,
+   table td,
+   table th {
+     display: block;
+   }
+
+   table thead {
+     display: none;
+   }
+
+   table tbody tr {
+     height: auto;
+     padding: 37px 0;
+   }
+
+   table tbody tr td {
+     padding-left: 40% !important;
+     margin-bottom: 24px;
+   }
+
+   table tbody tr td:last-child {
+     margin-bottom: 0;
+   }
+
+   table tbody tr td:before {
+     font-size: 14px;
+     color: #999999;
+     line-height: 1.2;
+     font-weight: unset;
+     position: absolute;
+     width: 40%;
+     left: 30px;
+     top: 0;
+   }
+
+   table tbody tr td:nth-child(1):before {
+     content: "Investment";
+   }
+
+   table tbody tr td:nth-child(2):before {
+     content: "Retail";
+   }
+
+   table tbody tr td:nth-child(3):before {
+     content: "Commercial";
+   }
+
+   table tbody tr td:nth-child(4):before {
+     content: "Price";
+   }
+
+   table tbody tr td:nth-child(5):before {
+     content: "Online";
+   }
+
+   .column4,
+   .column5,
+   .column6 {
+     text-align: left;
+   }
+
+   .column4,
+   .column5,
+   .column6,
+   .column1,
+   .column2,
+   .column3 {
+     width: 100%;
+   }
+
+   tbody tr {
+     font-size: 14px;
+   }
+
+   .column {
+     width: 100%;
+     float: left;
+     border: solid 4px black;
+     height: 100%;
+     margin: 0;
+   }
+
+   .default {
+     width: 50%;
+     float: left;
+     border: none;
+     height: 100%;
+   }
+
+   .portlet {
+     width: 90%;
+     margin: 0 1em 1em 0;
+     padding: 0.3em;
+   }
+
+   .portlet-header {
+     padding: 0.2em 0.3em;
+     margin-bottom: 0.5em;
+     position: relative;
+   }
+
+   .portlet-toggle {
+     position: absolute;
+     top: 50%;
+     right: 0;
+     margin-top: -8px;
+   }
+
+   .portlet-content {
+     padding: 0.4em;
+   }
+
+   .portlet-placeholder {
+     border: 1px dotted black;
+     margin: 0 1em 1em 0;
+     height: 50px;
+   }
+
+ }
+
+
+
+
+ @media (max-width: 576px) {
+   .container-table100 {
+     padding-left: 15px;
+     padding-right: 15px;
+   }
+ }
+</style>
+</body>
+</html>
